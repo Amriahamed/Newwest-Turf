@@ -786,10 +786,6 @@ header.scrolled .mobile-toggle span {
   transition: opacity 0.3s ease, transform 0.3s ease;
  }
 
- .portfolio-item.is-hidden {
-  display: none;
-}
-
 .home-works .work-item {
   height: 160px;
   overflow: hidden;
@@ -867,11 +863,6 @@ header.scrolled .mobile-toggle span {
 /* Force-hide portfolio overlays so gallery shows images only */
 .portfolio-overlay {
   display: none !important;
-}
-
-.load-more-btn {
-  display: inline-flex;
-  margin-top: 16px;
 }
 
 body.menu-open::before {
