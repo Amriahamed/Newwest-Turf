@@ -14,17 +14,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggle = document.querySelector('.mobile-toggle');
   const navLinks = document.querySelector('.nav-links');
 
-  mobileToggle.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
+  const closeMenu = () => {
+    mobileToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+    document.body.classList.remove('menu-open');
+  };
+
+  const toggleMenu = () => {
+    const isOpen = mobileToggle.classList.toggle('active');
+    navLinks.classList.toggle('active', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
+  };
+
+  if (mobileToggle && navLinks) {
+    mobileToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!navLinks.contains(event.target) && !mobileToggle.contains(event.target)) {
+        closeMenu();
+      }
+    });
+  }
 
   // Close mobile menu on link click
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
-      mobileToggle.classList.remove('active');
-      navLinks.classList.remove('active');
+      closeMenu();
     });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
   });
 
   // Scroll Animations using Intersection Observer
